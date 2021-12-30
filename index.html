@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>AJAX</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      .root {
+        text-align: center;
+        font-size: 16px;
+      }
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        border: 0;
+        clip-path: inset(100%);
+      }
+      .list {
+        display: inline-grid;
+        grid-template-columns: repeat(3, 300px);
+        grid-template-rows: auto;
+        justify-content: center;
+        gap: 15px;
+        margin: 0;
+        padding: 15px;
+        list-style-type: none;
+      }
+      .user {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+  
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        background: rgb(249, 72, 109);
+        background: linear-gradient(45deg, rgba(249, 72, 109, 0.5) 0%, rgba(238, 198, 45, 0.5) 100%);
+        border-radius: 10px;
+      }
+      .wrap {
+        display: flex;
+      }
+      .user__data,
+      .caption {
+        margin: 0;
+  
+        font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+        font-size: 0.9rem;
+      }
+      .user__data {
+        border-bottom: 1px solid transparent;
+        word-break: break-all;
+      }
+      .user__data:focus {
+        border-bottom: 1px solid red;
+        outline: none;
+        color: red;
+      }
+      .user__data:not(.user__name) {
+        font-style: italic;
+      }
+      .user__name {
+        font-size: 1.1rem;
+      }
+      .user__name,
+      .wrap:not(:last-child) {
+        margin-bottom: 10px;
+      }
+      .caption {
+        align-self: flex-start;
+        margin-right: 5px;
+        padding: 5px;
+        font-size: 0.7rem;
+        color: rgba(0, 0, 0, 0.8);
+        background-color: #ffc400;
+        border-radius: 5px;
+      }
+      .addressCompanyWrap {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .addressWrap,
+      .companyWrap {
+        width: 48%;
+      }
+      .addressWrap div,
+      .companyWrap div {
+        display: flex;
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      .buttonWrap {
+        display: flex;
+        justify-content: space-around;
+        margin-top: auto;
+      }
+      .button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #f35f01;
+        border-radius: 30px;
+        outline: none;
+        color: #ffffff;
+        cursor: pointer;
+      }
+      
+      .spinner {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: none;
+        place-items: center;
+        background-color: rgba(0,0,0,0.7);
+      }
+      .show-spinner {
+        display: grid;
+      }
+      .ball-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      .ball {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        margin: 0 10px;
+        animation: 500ms bounce ease infinite;
+      }
+      .blue {
+        background-color: #4285f5;
+      }
+      .red {
+        background-color: #ea4436;
+        animation-delay: 0.1s;
+      }
+      .yellow {
+        background-color: #fbbd06;
+        animation-delay: 0.2s;
+      }
+      .green {
+        background-color: #34a952;
+        animation-delay: 0.3s;
+      }
+      @keyframes bounce {
+        50% {
+          transform: translateY(25px);
+        }
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 40px;
+        border: 5px solid gold;
+  
+        border-radius: 5px;
+        background-color: #ffffff;
+  
+        transition: 200ms ease-in;
+      }
+      .modal-show {
+        display: block;
+      }
+      .modal__text {
+        font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="root" id="root"></main>
+    <div class="spinner">
+      <ul class="ball-wrapper">
+        <li class="ball blue"></li>
+        <li class="ball red"></li>
+        <li class="ball yellow"></li>
+        <li class="ball green"></li>
+      </ul>
+    </div>
+    <article class="modal" id="modal">
+      <h2 class="visually-hidden">Modal window that alerts messages to user</h2>
+      <p class="modal__text" id="modal__text"></p>
+    </article>
+    <script src="js/index.js"></script>
+  </body>
+</html>
